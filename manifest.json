@@ -1,0 +1,25 @@
+{
+    "manifest_version": 3,
+    "name": "Brace Matching",
+    "description": "Brace matching similar to code editors in any textfield! When you type an open bracket or quotation mark while highlighting words, it will add the closing bracket/quotation mark as well.",
+    "version": "1.0",
+    "action": {
+        "default_icon": "icon.png"
+    },
+    "background": {
+        "service_worker": "service-worker.js"
+    },
+    "permissions": [
+        "storage"
+    ],
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["content-script.js"]
+        }
+    ],
+    "web_accessible_resources": [{
+        "resources": ["script.js"],
+        "matches": ["<all_urls>"]
+    }]
+}

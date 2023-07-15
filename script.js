@@ -22,40 +22,6 @@ function isEditableElement(el) {
 }
 
 document.onkeydown = (event) => {
-    if (event.key === ".") {
-        let selection = null
-        if (typeof window.getSelection != "undefined") {
-            selection = window.getSelection()
-        } else if (typeof document.selection != "undefined" && document.selection.type == "Text") {
-            selection = document.getSelection()
-        }
-
-        if (selection === null || !selection.getRangeAt || !selection.rangeCount) {
-            console.log("No selection")
-            return
-        }
-
-        if (selection.toString() === "") {
-            console.log("Nothing selected")
-            return
-        }
-
-        event.preventDefault()
-        let range = window.getSelection().getRangeAt(0)
-
-        console.log(range.startContainer === range.endContainer)
-        console.log(range.endContainer.nodeName);
-        console.log(range.endContainer);
-        console.log(range.endContainer.parentNode);
-        console.log(range.endContainer.nodeType);
-        console.log(range.endContainer.nodeValue);
-        console.log(range.endContainer.textContent);
-        console.log(range.endOffset);
-
-        // range.collapse(false)
-        // const closingBrace = new KeyboardEvent('keydown', { key:"." })
-        // range.endContainer.dispatchEvent(closingBrace);
-    }
     if (event.key in mapping) {
         let selection = null
         if (typeof window.getSelection != "undefined") {
@@ -78,7 +44,7 @@ document.onkeydown = (event) => {
 
 
         let range = window.getSelection().getRangeAt(0)
-        if (!isEditableElement(range.startContainer.parentElement)) return
+        if (!isEditableElement(range.startContainer.parentElement) || !isEditableElement(range.endContainer.parentElement)) return
 
         event.preventDefault()
 
